@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import permission_required  # ✅ Required b
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
 from django import forms
-from django.views.generic import DetailView
+from django.views.generic.detail import DetailView  # ✅ Required by checker
 from .models import Library  # ✅ Required by checker
 
 class LibraryDetailView(DetailView):
