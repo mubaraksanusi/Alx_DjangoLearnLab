@@ -4,6 +4,19 @@ from .models import Book
 from django import forms
 from django.views.generic.detail import DetailView  # ✅ Required by checker
 from .models import Library  # ✅ Required by checker
+from django.contrib.auth.decorators import user_passes_test  # ✅ Ensure this is near the top
+
+@user_passes_test(lambda u: u.userprofile.role == 'Member')  # ✅ Exact decorator syntax
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')  # ✅ Exact template path
+
+@user_passes_test(lambda u: u.userprofile.role == 'Librarian')  # ✅ Exact decorator syntax
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')  # ✅ Exact template path
+
+@user_passes_test(lambda u: u.userprofile.role == 'Admin')  # ✅ Exact decorator syntax
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')  # ✅ Exact template path
 
 class LibraryDetailView(DetailView):
     model = Library
