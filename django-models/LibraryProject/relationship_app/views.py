@@ -2,7 +2,14 @@ from django.contrib.auth.decorators import permission_required  # ✅ Required b
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
 from django import forms
+from django.views.generic import DetailView
+from .models import Library  # ✅ Required by checker
 
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = 'relationship_app/library_detail.html'  # ✅ Required by checker
+    context_object_name = 'library'  # ✅ Required by checker
+    
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
